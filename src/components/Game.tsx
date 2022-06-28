@@ -1,7 +1,13 @@
+import { Actions } from '../reducers/index';
 import { Board } from './Board';
+import { Dispatch } from 'redux';
+import { HistoryAction } from '../actions/historyActions';
 import { Message } from './Message';
 import { MoveList } from './MoveList';
 import React from 'react';
+import { RootState } from '../store';
+import { StepNumberAction } from '../actions/stepNumberActions';
+import { XIsNextAction } from '../actions/xIsNextActions';
 import { calculateWinner } from '../lib/calculateWinner';
 import { connect } from 'react-redux';
 import { selectSquare } from '../actions/historyActions';
@@ -9,20 +15,10 @@ import { updateStepNumber } from '../actions/stepNumberActions';
 import { updateXIsNext } from '../actions/xIsNextActions';
 import { withLog } from '../lib/withLog';
 
-type Square = {
-  squares: [string | null];
-};
+type Props = RootState & Actions;
 
-type History = [Square];
-
-type Props = {
-  history: History;
-  stepNumber: number;
-  xIsNext: boolean;
-  selectSquareAction: any;
-  updateStepNumberAction: any;
-  updateXIsNextAction: any;
-};
+export type HandleClick = (i: number) => void;
+export type JumpTo = (step: number) => void;
 
 const Game: React.FC<Props> = ({
   history,
@@ -43,7 +39,7 @@ const Game: React.FC<Props> = ({
     status = `Next player: ${xIsNext ? 'X' : 'O'}`;
   }
 
-  const handleClick = (i: number) => {
+  const handleClick: HandleClick = (i) => {
     const historyClone = history.slice(0, stepNumber + 1);
     const squaresClone = current.squares.slice();
     if (winner || squaresClone[i]) {
@@ -55,7 +51,7 @@ const Game: React.FC<Props> = ({
     updateXIsNextAction(!xIsNext);
   };
 
-  const jumpTo = (step: number) => {
+  const jumpTo: JumpTo = (step) => {
     updateStepNumberAction(step);
     updateXIsNextAction(step % 2 === 0);
   };
@@ -76,7 +72,7 @@ const Game: React.FC<Props> = ({
   );
 };
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: RootState) => {
   return {
     history: state.history,
     stepNumber: state.stepNumber,
@@ -84,7 +80,7 @@ const mapStateToProps = (state: any) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Dispatch<HistoryAction | StepNumberAction | XIsNextAction>) => {
   return {
     selectSquareAction: (player: string, index: number, stepNumber: number) =>
       dispatch(selectSquare(player, index, stepNumber)),

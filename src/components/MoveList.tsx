@@ -1,19 +1,16 @@
+import { HistoryType } from '../reducers/history';
+import { JumpTo } from './Game';
 import React from 'react';
 
-type Square = {
-  squares: [string | null];
-};
-type History = [Square];
-
 type Props = {
-  history: History;
-  onClick: any;
+  history: HistoryType;
+  onClick: JumpTo;
 };
 
 export const MoveList = (props: Props) => {
   return (
     <ol>
-      {props.history.map((_: any, move: number) => {
+      {props.history.map((_, move: number) => {
         const desc = move ? `Go to move #${move}` : 'Go to game start';
 
         return (

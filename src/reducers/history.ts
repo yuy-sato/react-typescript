@@ -1,6 +1,11 @@
-const initialState = [{ squares: Array(9).fill(null) }];
+import { HistoryAction } from '../actions/historyActions';
 
-export const historyReducer = (state = initialState, action: any) => {
+export type SquaresValueType = string | null;
+export type HistoryType = { squares: SquaresValueType[] }[];
+
+const initialState: HistoryType = [{ squares: Array(9).fill(null) }];
+
+export const historyReducer = (state: HistoryType = initialState, action: HistoryAction) => {
   switch (action.type) {
     case 'SELECT_SQUARE': {
       const historyClone = state.slice(0, action.payload.stepNumber + 1);

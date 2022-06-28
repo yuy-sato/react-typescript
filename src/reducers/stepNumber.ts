@@ -1,6 +1,10 @@
-const initialState = 0;
+import { StepNumberAction } from '../actions/stepNumberActions';
 
-export const stepNumberReducer = (state = initialState, action: any) => {
+export type StepNumberType = number;
+
+const initialState: StepNumberType = 0;
+
+export const stepNumberReducer = (state: StepNumberType = initialState, action: StepNumberAction) => {
   switch (action.type) {
     case 'UPDATE_STEP_NUMBER':
       return action.payload.step;

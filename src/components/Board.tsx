@@ -1,9 +1,11 @@
+import { HandleClick } from './Game';
 import React from 'react';
 import { Square } from './Square';
+import { SquaresValueType } from '../reducers/history';
 
 type Props = {
-  squares: [string | null];
-  onClick: any;
+  squares: SquaresValueType[];
+  onClick: HandleClick;
 };
 
 export const Board: React.FC<Props> = (props) => {
