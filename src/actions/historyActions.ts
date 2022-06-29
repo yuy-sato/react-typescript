@@ -1,19 +1,12 @@
 import { FSA } from './FSAInterface';
 
-type Action = 'SELECT_SQUARE';
+export type History_Actions =
+  | FSA<'SELECT_SQUARE', { player: string; index: number; stepNumber: number }>
+  | FSA<'HOGE_ACTION'>;
 
-export interface HistoryAction extends FSA<string | number> {
-  type: Action;
-  payload: {
-    player: string;
-    index: number;
-    stepNumber: number;
-  };
-}
+export type SelectSquare = (player: string, index: number, stepNumber: number) => History_Actions;
 
-export type SelectSquare = (player: string, index: number, stepNumber: number) => HistoryAction;
-
-export const selectSquare: SelectSquare = (player: string, index: number, stepNumber: number): HistoryAction => {
+export const selectSquare = (player: string, index: number, stepNumber: number): History_Actions => {
   return {
     type: 'SELECT_SQUARE',
     payload: {
@@ -22,4 +15,9 @@ export const selectSquare: SelectSquare = (player: string, index: number, stepNu
       stepNumber,
     },
   };
+};
+
+export const hogeAction: History_Actions = {
+  type: 'HOGE_ACTION',
+  payload: {},
 };

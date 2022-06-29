@@ -1,17 +1,10 @@
 import { FSA } from './FSAInterface';
 
-type Action = 'UPDATE_STEP_NUMBER';
+export type StepNumber_Actions = FSA<'UPDATE_STEP_NUMBER', { step: number }>;
 
-export interface StepNumberAction extends FSA<number> {
-  type: Action;
-  payload: {
-    step: number;
-  };
-}
+export type UpdateStepNumber = (step: number) => StepNumber_Actions;
 
-export type UpdateStepNumber = (step: number) => StepNumberAction;
-
-export const updateStepNumber: UpdateStepNumber = (step: number): StepNumberAction => {
+export const updateStepNumber: UpdateStepNumber = (step: number): StepNumber_Actions => {
   return {
     type: 'UPDATE_STEP_NUMBER',
     payload: {

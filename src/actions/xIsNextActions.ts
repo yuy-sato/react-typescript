@@ -1,17 +1,10 @@
 import { FSA } from './FSAInterface';
 
-type Action = 'UPDATE_X_IS_NEXT';
+export type XIsNext_Actions = FSA<'UPDATE_X_IS_NEXT', { xIsNext: boolean }>;
 
-export interface XIsNextAction extends FSA<boolean> {
-  type: Action;
-  payload: {
-    xIsNext: boolean;
-  };
-}
+export type UpdateXIsNext = (xIsNext: boolean) => XIsNext_Actions;
 
-export type UpdateXIsNext = (xIsNext: boolean) => XIsNextAction;
-
-export const updateXIsNext: UpdateXIsNext = (xIsNext: boolean): XIsNextAction => {
+export const updateXIsNext: UpdateXIsNext = (xIsNext: boolean): XIsNext_Actions => {
   return {
     type: 'UPDATE_X_IS_NEXT',
     payload: {
