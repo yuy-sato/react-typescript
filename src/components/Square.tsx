@@ -1,8 +1,9 @@
 import React from 'react';
+import { SquaresValueType } from '../reducers/history';
 
 type Props = {
-  value: string | null;
-  onClick: any;
+  value: SquaresValueType;
+  onClick: () => void;
 };
 
 export const Square = (props: Props) => {

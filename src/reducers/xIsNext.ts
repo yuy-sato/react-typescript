@@ -1,6 +1,10 @@
-const initialState = true;
+import { XIsNext_Actions } from '../actions/xIsNextActions';
 
-export const xIsNextReducer = (state = initialState, action: any) => {
+export type XIsNextType = boolean;
+
+const initialState: XIsNextType = true;
+
+export const xIsNextReducer = (state: XIsNextType = initialState, action: XIsNext_Actions) => {
   switch (action.type) {
     case 'UPDATE_X_IS_NEXT':
       return action.payload.xIsNext;

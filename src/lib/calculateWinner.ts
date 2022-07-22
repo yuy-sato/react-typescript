@@ -1,4 +1,6 @@
-export const calculateWinner = (squares: [null | string]) => {
+import { SquaresValueType } from '../reducers/history';
+
+export const calculateWinner = (squares: SquaresValueType[]) => {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],

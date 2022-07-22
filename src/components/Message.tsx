@@ -1,5 +1,9 @@
 import React from 'react';
 
-export const Message = ({ message }: any) => {
+type Props = {
+  message: string;
+};
+
+export const Message: React.FC<Props> = ({ message }) => {
   return <p>{message}</p>;
 };
